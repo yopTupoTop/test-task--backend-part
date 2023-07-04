@@ -1,15 +1,18 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
+	"test-task_backend/events"
+	"test-task_backend/handler"
+
+	"github.com/gorilla/mux"
 )
 
-func hello(res http.ResponseWriter, req *http.Request) {
-	fmt.Fprint(res, "hello")
-}
-
 func main() {
-	http.HandleFunc("/", hello)
-	http.ListenAndServe("localhost:8080", nil)
+	go events.SubscribeToEvents()
+	router := mux.NewRouter()
+	router.HandleFunc("/collectionsCreated", handler.GetCreatedLog).Methods("GET")
+	router.HandleFunc("/tokensMinted", handler.GetMintedLog).Methods("GET")
+
+	http.ListenAndServe("localhost:8080", router)
 }
