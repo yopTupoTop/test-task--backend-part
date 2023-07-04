@@ -26,7 +26,7 @@ func SubscribeToEvents() {
 		log.Fatal(err)
 	}
 
-	contractAddress := common.HexToAddress("0x147B8eb97fD247D06C4006D269c90C1908Fb5D54")
+	contractAddress := common.HexToAddress("0x762C3042D7199ADf699f22Cb27dDC75d652f7156")
 	query := ethereum.FilterQuery{
 		Addresses: []common.Address{contractAddress},
 	}
